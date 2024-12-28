@@ -1,3 +1,23 @@
+import os, subprocess, sys, time, string, threading, platform
+MODULES = ["asyncio", "telethon", "fake_useragent", "pystyle", "pyfiglet", "termcolor"]
+DATA = []
+
+def installation(package):
+    subprocess.check_call([sys.executable, "-m", "pip", "install", package])
+
+
+def LIBS_CHECKER():
+    for module in MODULES:
+        try:
+            __import__(module)
+            DATA.append(module)
+        except ImportError:
+            installation(module)
+            
+LIBS_CHECKER()
+
+
+
 import asyncio
 from telethon import TelegramClient
 from pystyle import Write, Colors, Center
